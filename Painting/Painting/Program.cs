@@ -11,6 +11,7 @@ namespace Painting
     {
         private uint color;
         private int x, y, w, h;
+        private bool update2 = true;
 
         public Rectangle(uint color, int x, int y, int w, int h)
         {
@@ -27,52 +28,80 @@ namespace Painting
         }
         public void Update(int Width, int Height)
         {
-            if (x < Height - 100)
+
+            if (update2 == true)
             {
-                x++;
-                y++;
+                if (x < Height - 100)
+                {
+                    x++;
+                    y++;
+                }
+                else if (x < Height + 100 && y > 0)
+                {
+                    x++;
+                    y--;
+                }
+                else if (x < Width - 100 && y < Height - 160)
+                {
+                    x++;
+                    y++;
+                }
+                else if (x <= Width - 100 && y < Height - 100)
+                {
+                    x--;
+                    y++;
+                }
+                else
+                //(x < Width && y < Height)
+                {
+                    x++;
+                    y--;
+                    update2 = false;
+                }
             }
-            else if (x < Height + 100 && y > 0)
+            else
+                Update2(Width, Height);
+
+        }
+        public void Update2(int Width, int Height)
+        {
+            bool update = true;
+            if (update == true) { 
+            if (x < Width && y > 0)
             {
-                x++;
+                x--;
                 y--;
+                //update = true;
             }
-            else if (x < Width - 100 && y < Height - 160)
-            {
-                x++;
-                y++;
             }
-            else if (x <= Width - 100 && y < Height - 100)
+            else
+                //(x<Width && y >= 0)
             {
                 x--;
                 y++;
+                update = false;
             }
-            else if (x < Width && y < Height)
-            {
-                x++;
-                y--;
-            }
-
         }
-    }
 
-    class Program
-    {
-        static void Main(string[] args)
+        class Program
         {
-            Console.CursorVisible = false;
-            ConsoleGraphics graphics = new ConsoleGraphics();
-
-            Rectangle r = new Rectangle(0xFFFF0000, 0, 0, 100, 100);
-
-            while (true)
+            static void Main(string[] args)
             {
-                graphics.FillRectangle(0x0FFFFFFF, 0, 0, graphics.ClientWidth, graphics.ClientHeight);
-                r.Update(graphics.ClientWidth, graphics.ClientHeight);
-                r.Render(graphics);
+                Console.CursorVisible = false;
+                ConsoleGraphics graphics = new ConsoleGraphics();
 
-                graphics.FlipPages();
-                System.Threading.Thread.Sleep(1);
+                Rectangle r = new Rectangle(0xFFFF0000, 0, 0, 100, 100);
+
+                while (true)
+                {
+                    graphics.FillRectangle(0x0FFFFFFF, 0, 0, graphics.ClientWidth, graphics.ClientHeight);
+                    r.Update(graphics.ClientWidth, graphics.ClientHeight);
+                    r.Render(graphics);
+
+
+                    graphics.FlipPages();
+                    System.Threading.Thread.Sleep(1);
+                }
             }
         }
     }
