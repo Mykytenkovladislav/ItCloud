@@ -49,7 +49,7 @@ namespace Painting
             }
             else if (x < Width && y < Height)
             {
-                x--;
+                x++;
                 y--;
             }
 
@@ -69,7 +69,6 @@ namespace Painting
             {
                 graphics.FillRectangle(0x0FFFFFFF, 0, 0, graphics.ClientWidth, graphics.ClientHeight);
                 r.Update(graphics.ClientWidth, graphics.ClientHeight);
-                r.Update2(graphics.ClientWidth, graphics.ClientHeight);
                 r.Render(graphics);
 
                 graphics.FlipPages();
