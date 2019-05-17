@@ -25,17 +25,34 @@ namespace Painting
         {
             graphics.FillRectangle(color, x, y, w, h);
         }
-        public void Update(int width, int hight)
+        public void Update(int Width, int Height)
         {
-            if (y < hight) { 
-            x++;
-            y++;
+            if (x < Height - 100)
+            {
+                x++;
+                y++;
             }
-            else if (x > width)
+            else if (x < Height + 100 && y > 0)
             {
                 x++;
                 y--;
             }
+            else if (x < Width - 100 && y < Height - 160)
+            {
+                x++;
+                y++;
+            }
+            else if (x <= Width - 100 && y < Height - 100)
+            {
+                x--;
+                y++;
+            }
+            else if (x < Width && y < Height)
+            {
+                x--;
+                y--;
+            }
+
         }
     }
 
@@ -52,7 +69,7 @@ namespace Painting
             {
                 graphics.FillRectangle(0x0FFFFFFF, 0, 0, graphics.ClientWidth, graphics.ClientHeight);
                 r.Update(graphics.ClientWidth, graphics.ClientHeight);
-
+                r.Update2(graphics.ClientWidth, graphics.ClientHeight);
                 r.Render(graphics);
 
                 graphics.FlipPages();
