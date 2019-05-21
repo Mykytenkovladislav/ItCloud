@@ -16,7 +16,6 @@ namespace Bank
 
     struct ClientsList
     {
-        public int CountOfUsers;
         public InfoClient[] Client;
     }
     class Bank

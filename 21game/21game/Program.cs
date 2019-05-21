@@ -57,8 +57,8 @@ namespace _21game
         public static List<Cards> ComCards = new List<Cards>();
         public static List<Cards> PlayerCards = new List<Cards>();
         public static List<int> RandN = new List<int>();
-        public static int PlayerScore = 0;
-        public static int ComScore = 0;
+        private static int PlayerScore = 0;
+        private static int ComScore = 0;
 
         static void Main(string[] args)
         {
